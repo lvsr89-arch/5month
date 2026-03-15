@@ -20,8 +20,10 @@
         <slf4jVersion>2.0.9</slf4jVersion>
         <logbackVersion>1.5.13</logbackVersion>
         <surefireVersion>3.5.5</surefireVersion>
-
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -55,17 +57,45 @@
             <version>${surefireVersion}</version>
         </dependency>
     </dependencies>
+
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>25</source>
-                    <target>25</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefireVersion}</version>
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <!-- Development Profile -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <base.Url>https://auto.mail.ru</base.Url>
+                <browser.type>chrome</browser.type>
+            </properties>
+        </profile>
 
+        <!-- Production Profile -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <base.Url>https://auto.mail.ru</base.Url>
+                <browser.type>chrome</browser.type>
+            </properties>
+        </profile>
+    </profiles>
 </project>

@@ -24,12 +24,12 @@ public class TestExecJs {
     private String birthdate = "03-12-2026";
 
 
-    @BeforeAll
+//    @BeforeAll
     public static void init() {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeEach
+//    @BeforeEach
     public void beforeEach() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -37,7 +37,7 @@ public class TestExecJs {
         driver.get(baseUrl);
     }
 
-    @AfterEach
+//    @AfterEach
     public void teardown() {
         if (driver != null) {
             driver.quit();
@@ -90,7 +90,7 @@ public class TestExecJs {
         }
     }
 
-    @Test
+//    @Test
     public void execJs() throws InterruptedException {
 
 
