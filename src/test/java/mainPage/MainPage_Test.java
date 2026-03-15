@@ -7,7 +7,7 @@ import pages.MainPage;
 public class MainPage_Test extends AbsBaseTest{
 
     @Test
-    public void clickArticle() throws InterruptedException {
+    public void mainPage() throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
 
@@ -15,12 +15,5 @@ public class MainPage_Test extends AbsBaseTest{
         form.enterValues();
         form.pushTheButton();
         form.checkCorrect();
-
-
-        //        Comp1 comp1 = new Comp1(driver);
-//        String title = comp1.getSliderItemByIndex(1);
-//        comp1
-//                .clickLinkByTitle(title)
-//                .pageHeaderShouldBeSameAs(title);
     }
 }

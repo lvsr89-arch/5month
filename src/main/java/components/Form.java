@@ -4,19 +4,17 @@ import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import pageobject.AbsPageObject;
-
-import java.util.Arrays;
+import factory.WebDriverFactory;
 
 public class Form extends AbsPageObject {
 
     // ХЗ, не понял как лучше сделать привязку: локатор - вводные данные
-    private final String login = System.getenv("login");
-    private final String email = System.getenv("email");
-    private final String password = System.getenv("password");
+    private final String login = System.getProperty("login");
+    private final String email = System.getProperty("email");
+    private final String password = System.getProperty("password");
     private final String langLevel = "Средний";
     private final String date = "10-03-2003";
-
-
+    private final String browserType = driver.toString().toLowerCase();
 
     public Form(WebDriver driver) {
         super(driver);
@@ -37,14 +35,20 @@ public class Form extends AbsPageObject {
     }
 
     private void inpLangLvl (String elementName, String elementId) {
-        WebElement language = driver.findElement(By.id("language_level"));
+        WebElement language = driver.findElement(By.id(elementId));
         Select select = new Select(language);
-        select.selectByVisibleText(langLevel);
+        select.selectByVisibleText(elementName);
     }
 
     private void inputDate (String elementName, String elementId) {
         WebElement nameId1 = driver.findElement(By.id(elementId));
-        nameId1.sendKeys(elementName);
+        if (browserType.contains("chrome")) {
+            nameId1.sendKeys(elementName);
+        } else {
+            nameId1.sendKeys(convertDate(elementName));
+        }
+
+
     }
 
     private void btnClick () {
@@ -54,11 +58,11 @@ public class Form extends AbsPageObject {
 
     private String convertDate (String inpDate) {
         String[] temp = inpDate.split("-");
-        System.out.println(Arrays.toString(temp));
         return temp[2] + "-" + temp[1] + "-" + temp[0];
     }
 
     public void enterValues() {
+        System.out.println("ВЫВОЖУ " + login + " " + email + " " + password);
         feById(login,"username");
         feById(email,"email");
         feById(password, "password");

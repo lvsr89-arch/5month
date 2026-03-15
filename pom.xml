@@ -73,19 +73,24 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefireVersion}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <base.url>${base.url}</base.url>
+                        <browser.type>${browser.type}</browser.type>
+                        <main.path>${main.path}</main.path>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>
     <profiles>
         <!-- Development Profile -->
         <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>test</id>
             <properties>
-                <base.Url>https://auto.mail.ru</base.Url>
-                <browser.type>chrome</browser.type>
+                <base.url>https://otus.home.kartushin.su</base.url>
+                <browser.type>firefox</browser.type>
+                <main.path>form.html</main.path>
             </properties>
         </profile>
 
@@ -93,8 +98,9 @@
         <profile>
             <id>prod</id>
             <properties>
-                <base.Url>https://auto.mail.ru</base.Url>
+                <base.url>https://otus.home.kartushin.su</base.url>
                 <browser.type>chrome</browser.type>
+                <main.path>form.html</main.path>
             </properties>
         </profile>
     </profiles>
