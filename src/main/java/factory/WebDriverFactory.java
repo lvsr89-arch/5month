@@ -9,18 +9,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WebDriverFactory {
 
     private final String browserType = System.getProperty("browser.type").trim().toLowerCase();
+    private static final Logger logger = LoggerFactory.getLogger(WebDriverFactory.class);
 
     public WebDriver create() {
+        logger.info("Поднимаю драйвер браузера {}", browserType);
         switch (browserType) {
             case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = (ChromeOptions) new ChromeSettings().settings();
                 return new ChromeDriver(chromeOptions);
-
 
             }
             case "firefox" -> {

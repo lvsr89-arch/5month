@@ -7,13 +7,13 @@ import pages.MainPage;
 public class MainPage_Test extends AbsBaseTest{
 
     @Test
-    public void mainPage() throws InterruptedException {
+    public void mainPage() {
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
 
         Form form = new Form(driver);
         form.enterValues();
-        form.pushTheButton();
+        form.btnClick();
         form.checkCorrect();
     }
 }
